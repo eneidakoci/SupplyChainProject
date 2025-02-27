@@ -1,6 +1,7 @@
 let web3;
 let contract;
-const contractAddress = '0xA1d2cc7F965e252AE76667E229891cD0D7275052';
+// const contractAddress = '0xA1d2cc7F965e252AE76667E229891cD0D7275052';
+const contractAddress = '0x75297c9B55CaD6cb110f24fB51128f26C186811A';
 
 // Contract ABI - copied this from build/contracts/SupplyChain.json
 const abi = [
@@ -194,9 +195,9 @@ async function init() {
               window.location.reload();
           });
 
-          // Listen for network changes
+          // listen for network changes
           window.ethereum.on('chainChanged', function (networkId) {
-              // Refresh the page to ensure everything is reset
+              // refresh the page to ensure everything is reset
               window.location.reload();
           });
 
@@ -211,7 +212,7 @@ async function init() {
   }
 }
 
-// new function for retrieving last created account
+// function for retrieving last created account
 async function getCurrentAccount() {
   const accounts = await web3.eth.getAccounts();
   console.log('Current account:', accounts[0]);
@@ -242,50 +243,6 @@ async function addProduct() {
       alert('Error adding product: ' + error.message);
   }
 }
-
-// async function addProduct() {
-//     if (!contract) {
-//         alert('Contract not initialized. Please wait or refresh the page.');
-//         return;
-//     }
-    
-//     const name = document.getElementById('productName').value;
-//     const location = document.getElementById('initialLocation').value;
-    
-//     try {
-//         const accounts = await web3.eth.getAccounts();
-//         if (accounts.length === 0) {
-//             alert('No accounts found. Please connect MetaMask.');
-//             return;
-//         }
-//         console.log('Using account:', accounts[0]);
-//         await contract.methods.addProduct(name, location)
-//             .send({ from: accounts[0] });
-//         alert('Product added successfully!');
-//     } catch (error) {
-//         console.error('Error adding product:', error);
-//         alert('Error adding product: ' + error.message);
-//     }
-// }
-
-// async function updateLocation() {
-//     if (!contract) {
-//         alert('Contract not initialized. Please wait or refresh the page.');
-//         return;
-//     }
-
-//     const productId = document.getElementById('productId').value;
-//     const newLocation = document.getElementById('newLocation').value;
-    
-//     try {
-//         const accounts = await web3.eth.getAccounts();
-//         await contract.methods.updateLocation(productId, newLocation)
-//             .send({ from: accounts[0] });
-//         alert('Location updated successfully!');
-//     } catch (error) {
-//         alert('Error updating location: ' + error.message);
-//     }
-// }
 
 async function updateLocation() {
   if (!contract) {
@@ -328,5 +285,5 @@ async function getProductHistory() {
     }
 }
 
-// Initialize when page loads
+// initialize when page loads
 window.addEventListener('load', init);
